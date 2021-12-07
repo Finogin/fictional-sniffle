@@ -3,6 +3,8 @@ const HTMLWEbpackplugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
+console.log("webpack", process.env.DOMAIN);
+
 module.exports = {
   mode: "development",
   entry: "./src/index.js",
@@ -22,7 +24,9 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     new webpack.DefinePlugin({
-      "process.env.DOMAIN": JSON.stringify(process.env.DOMAIN),
+      "process.env": {
+        "DOMAIN": JSON.stringify(process.env.DOMAIN)
+      },
     }),
   ],
   module: {

@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Authorization = () => {
+  console.log('process',process.env);
   const href = `https://unsplash.com/oauth/authorize?client_id=8kg4TDfxSTMsMwOLpuObmbhy6PDXlT_JeNAvUF9ctlI&redirect_uri=${process.env.DOMAIN}/code&response_type=code&scope=public+read_user+write_user+read_photos+write_photos+write_likes+write_followers+read_collections+write_collections`;
   return (
 
