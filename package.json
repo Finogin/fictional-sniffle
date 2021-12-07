@@ -4,9 +4,8 @@
   "description": "First React program",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "start": "webpack-dev-server",
+    "dev": "webpack-dev-server --mode development",
     "deploy": "gh-pages -d dist",
     "predeploy": "npm run build"
   },
