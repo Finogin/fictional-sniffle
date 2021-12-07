@@ -1,9 +1,10 @@
 const path = require("path");
 const HTMLWEbpackplugin = require("html-webpack-plugin");
+const webpack = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
-  mode: "production",
+  mode: "development",
   entry: "./src/index.js",
   output: {
     filename: "build.[contenthash].js",
