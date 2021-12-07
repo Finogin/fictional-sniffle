@@ -1,37 +1,39 @@
-const  path = require ('path')
-const HTMLWEbpackplugin = require ('html-webpack-plugin')
-const {CleanWebpackPlugin} = require ('clean-webpack-plugin')
-
+const path = require("path");
+const HTMLWEbpackplugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
-  mode: 'production',
-  entry: './src/index.js',
+  mode: "production",
+  entry: "./src/index.js",
   output: {
-    filename: 'build.[contenthash].js',
-    path: path.resolve (__dirname, 'dist'),
-    publicPath : '/'
+    filename: "build.[contenthash].js",
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
   },
-  
-  devServer: {
-    historyApiFallback : true
-  },
-  
-  plugins: [new HTMLWEbpackplugin({
-    template: './index.html'
-  }), 
-  new CleanWebpackPlugin()
-],
-module: {
-  rules: [
 
-    {
-      test: /\.js$/,
-      use : ['babel-loader']
-  }, 
-  {
-    test: /\.css$/i,
-    use: ["style-loader", "css-loader"],
-  }
-  ]
-}
+  devServer: {
+    historyApiFallback: true,
+  },
+
+  plugins: [
+    new HTMLWEbpackplugin({
+      template: "./index.html",
+    }),
+    new CleanWebpackPlugin(),
+    new webpack.DefinePlugin({
+      "process.env.DOMAIN": JSON.stringify(process.env.DOMAIN),
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: ["babel-loader"],
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+    ],
+  },
 };
