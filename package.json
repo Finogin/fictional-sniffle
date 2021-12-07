@@ -4,8 +4,9 @@
   "description": "First React program",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode production",
-    "dev": "cross-env DOMAIN=http://localhost:8080  webpack-dev-server --mode development"
+    "build": "cross-env DOMAIN=https://fictional-sniffle.vercel.app webpack --mode production",
+    "dev": "cross-env DOMAIN=http://localhost:8080  webpack-dev-server --mode development",
+    "start": "serve -s dist"
   },
   "keywords": [
     "react",
