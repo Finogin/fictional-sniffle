@@ -18,7 +18,7 @@ export function authorization(code) {
   const data = {
     client_id: "8kg4TDfxSTMsMwOLpuObmbhy6PDXlT_JeNAvUF9ctlI",
     client_secret: "e-EXP_hOtcpUShxEkzHqdcM8amOPf--PoX_uUe9vCDk",
-    redirect_uri: "http://localhost:8080/code",
+    redirect_uri: `${process.env.DOMAIN}/code`,
     code,
     grant_type: "authorization_code",
   };
