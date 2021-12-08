@@ -20,11 +20,11 @@ let Photos = (props) => {
   async function toggleLike() {
     try {
       if (photo.liked_by_user === false) {
-        await setLiked(id);
-        dispatch(setLike(id));
+       const like =  await setLiked(id);
+        dispatch(setLike(like.data));
       } else {
-        await deleteLiked(id);
-        dispatch(deleteLike(id));
+       const deleted = await deleteLiked(id);
+        dispatch(deleteLike(deleted.data));
         //  setPhoto({...photo, liked_by_user : !photo.liked_by_user, likes: photo.likes - 1 })
       }
     } catch (err) {
@@ -38,8 +38,8 @@ let Photos = (props) => {
       try {
         const data = await getPhotoByAPI(id);
         // setPhoto(data)
-        dispatch(getPhotoID(data));
-        console.log("set photo", data);
+        dispatch(getPhotoID(data.data));
+        console.log("set photo", data.data);
       } catch (err) {
       } finally {
         setLoading(false);

@@ -12,22 +12,32 @@ let Main = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("USE EFFECT COMPONENT MAIN", photos.length);
-    if (photos.length === 0) {
-      getPhotosByAPI().then((data) => {
-        console.log(data);
-        dispatch(addPhotos(data));
-      });
+    async function fetchMyAPI() {
+      try {
+      if (photos.length === 0) {
+        let response = await getPhotosByAPI();
+        console.log('ээээээ',response.data);
+        dispatch(addPhotos(response.data));
+      }
     }
+    catch (err) {
+      alert(err);
+    }
+  } 
+    fetchMyAPI();
   }, []);
 
-  const loadMore = () => {
-    const nextPage = page + 1;
-    getPhotosByAPI(nextPage).then((data) => {
-      console.log(data);
-      dispatch(addPhotos(data));
-    });
-  };
+async function loadMore () {
+  try {
+  const nextPage = page + 1;
+ let response = await getPhotosByAPI(nextPage)
+ dispatch(addPhotos(response));
+}
+catch (err) {
+  alert(err);
+}
+}
+
 
   console.log("Main compnent, photos:", photos);
   return (

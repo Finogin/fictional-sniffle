@@ -43,48 +43,41 @@ export function getPhotosByAPI(page) {
         page: page || 1,
         per_page: 10,
       },
-    })
-    .then(function (response) {
-      return response.data;
-    })
-    .catch(function (error) {
-      alert(error);
-      return error;
-    });
+})
 }
 
 export function getPhotoByAPI(id) {
   return api
     .get("photos/" + id)
-    .then(function (response) {
-      return response.data;
-    })
-    .catch(function (error) {
-      alert(error);
-      return error;
-    });
+    // .then(function (response) {
+    //   return response.data;
+    // })
+    // .catch(function (error) {
+    //   alert(error);
+    //   return error;
+    // });
 }
 
 export function setLiked(id) {
   return api
     .post("photos/" + id + "/like")
-    .then(function (response) {
-      return response.data;
-    })
-    .catch(function (error) {
-      alert(error);
-      return error;
-    });
+    // .then(function (response) {
+    //   return response.data;
+    // })
+    // .catch(function (error) {
+    //   alert(error);
+    //   return error;
+    // });
 }
 
 export function deleteLiked(id) {
   return api
     .delete("photos/" + id + "/like")
-    .then(function (response) {
-      return response.data;
-    })
-    .catch(function (error) {
-      alert(error);
-      return error;
-    });
+    // .then(function (response) {
+    //   return response.data;
+    // })
+    // .catch(function (error) {
+    //   alert(error);
+    //   return error;
+    // });
 }
