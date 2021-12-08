@@ -14,30 +14,27 @@ let Main = () => {
   useEffect(() => {
     async function fetchMyAPI() {
       try {
-      if (photos.length === 0) {
-        let response = await getPhotosByAPI();
-        console.log('ээээээ',response.data);
-        dispatch(addPhotos(response.data));
+        if (photos.length === 0) {
+          let response = await getPhotosByAPI();
+          console.log("ээээээ", response.data);
+          dispatch(addPhotos(response.data));
+        }
+      } catch (err) {
+        alert(err);
       }
     }
-    catch (err) {
-      alert(err);
-    }
-  } 
     fetchMyAPI();
   }, []);
 
-async function loadMore () {
-  try {
-  const nextPage = page + 1;
- let response = await getPhotosByAPI(nextPage)
- dispatch(addPhotos(response));
-}
-catch (err) {
-  alert(err);
-}
-}
-
+  async function loadMore() {
+    try {
+      const nextPage = page + 1;
+      let response = await getPhotosByAPI(nextPage);
+      dispatch(addPhotos(response));
+    } catch (err) {
+      alert(err);
+    }
+  }
 
   console.log("Main compnent, photos:", photos);
   return (

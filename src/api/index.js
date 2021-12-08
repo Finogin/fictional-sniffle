@@ -37,47 +37,22 @@ export function authorization(code) {
 
 export function getPhotosByAPI(page) {
   console.log("getPhotosByApi", api.defaults.headers);
-  return api
-    .get("photos", {
-      params: {
-        page: page || 1,
-        per_page: 10,
-      },
-})
+  return api.get("photos", {
+    params: {
+      page: page || 1,
+      per_page: 10,
+    },
+  });
 }
 
 export function getPhotoByAPI(id) {
-  return api
-    .get("photos/" + id)
-    // .then(function (response) {
-    //   return response.data;
-    // })
-    // .catch(function (error) {
-    //   alert(error);
-    //   return error;
-    // });
+  return api.get("photos/" + id);
 }
 
 export function setLiked(id) {
-  return api
-    .post("photos/" + id + "/like")
-    // .then(function (response) {
-    //   return response.data;
-    // })
-    // .catch(function (error) {
-    //   alert(error);
-    //   return error;
-    // });
+  return api.post("photos/" + id + "/like");
 }
 
 export function deleteLiked(id) {
-  return api
-    .delete("photos/" + id + "/like")
-    // .then(function (response) {
-    //   return response.data;
-    // })
-    // .catch(function (error) {
-    //   alert(error);
-    //   return error;
-    // });
+  return api.delete("photos/" + id + "/like");
 }
