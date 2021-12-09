@@ -17,21 +17,30 @@ let Photos = (props) => {
   // const [photos, setPhoto] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  async function toggleLike() {
-    try {
+   function toggleLike() {
       if (photo.liked_by_user === false) {
-       const like =  await setLiked(id);
-        dispatch(setLike(like.data));
-      } else {
-       const deleted = await deleteLiked(id);
-        dispatch(deleteLike(deleted.data));
-        //  setPhoto({...photo, liked_by_user : !photo.liked_by_user, likes: photo.likes - 1 })
+      let response = setLiked(id)
+        dispatch(setLike(response.data))
+        .catch(function (error) {
+          alert(error);
+          photo.likes -1
+          photo.liked_by_user = false
+        });
       }
-    } catch (err) {
-      alert(err);
-    }
+      
+      else {
+      const response =  deleteLiked(id)
+        dispatch(deleteLike(response.data))
+        .catch(function (error) {
+          alert(error);
+          photo.likes +1
+          photo.liked_by_user = true
+        })
+        //  setPhoto({...photo, liked_by_user : !photo.liked_by_user, likes: photo.likes - 1 })
+
     // setPhoto({...photo, liked_by_user : !photo.liked_by_user})
   }
+}
 
   useEffect(() => {
     async function getPhoto() {

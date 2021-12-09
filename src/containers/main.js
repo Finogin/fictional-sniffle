@@ -30,7 +30,7 @@ let Main = () => {
     try {
       const nextPage = page + 1;
       let response = await getPhotosByAPI(nextPage);
-      dispatch(addPhotos(response));
+      dispatch(addPhotos(response.data));
     } catch (err) {
       alert(err);
     }
