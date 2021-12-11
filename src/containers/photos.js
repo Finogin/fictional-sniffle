@@ -5,58 +5,62 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { getPhotoByAPI } from "../api/index";
 import { deleteLiked, setLiked } from "../api/index";
-import { getPhotoID, deleteLike, setLike } from "../actions/index";
+import { setPhotoID, deleteLike, setLike } from "../actions/index";
+import { combineReducers } from "redux";
 
 let Photos = (props) => {
   const navigate = useNavigate();
   const { id } = useParams();
   const photo = useSelector((state) => state.photos.photo);
+  const photos = useSelector((state) => state.photos.data);
   const dispatch = useDispatch();
 
   console.log(id);
   // const [photos, setPhoto] = useState(null);
   const [loading, setLoading] = useState(true);
 
-   function toggleLike() {
-      if (photo.liked_by_user === false) {
-      let response = setLiked(id)
-        dispatch(setLike(response.data))
-        .catch(function (error) {
-          alert(error);
-          photo.likes -1
-          photo.liked_by_user = false
-        });
+  function toggleLike() {
+    if (photo.liked_by_user === false) {
+      try {
+        setLiked(id);
+        dispatch(setLike());
+      } catch (err) {
+        dispatch(deleteLike());
       }
-      
-      else {
-      const response =  deleteLiked(id)
-        dispatch(deleteLike(response.data))
-        .catch(function (error) {
-          alert(error);
-          photo.likes +1
-          photo.liked_by_user = true
-        })
-        //  setPhoto({...photo, liked_by_user : !photo.liked_by_user, likes: photo.likes - 1 })
+    } else {
+      try {
+        deleteLiked(id);
+        dispatch(deleteLike());
+      } catch (err) {
+        dispatch(setLike());
+      }
+      //  setPhoto({...photo, liked_by_user : !photo.liked_by_user, likes: photo.likes - 1 })
 
-    // setPhoto({...photo, liked_by_user : !photo.liked_by_user})
+      // setPhoto({...photo, liked_by_user : !photo.liked_by_user})
+    }
   }
-}
 
   useEffect(() => {
     async function getPhoto() {
-      try {
-        const data = await getPhotoByAPI(id);
-        // setPhoto(data)
-        dispatch(getPhotoID(data.data));
-        console.log("set photo", data.data);
-      } catch (err) {
-      } finally {
-        setLoading(false);
+      const findPhoto = photos.find((photo) => photo.id === id);
+
+      if (findPhoto) {
+        console.log("непустое значение");
+        dispatch(setPhotoID(findPhoto));
+        console.log("Вывод данных из стора", findPhoto);
+      } else {
+        try {
+          const data = await getPhotoByAPI(id);
+          // setPhoto(data)
+          dispatch(setPhotoID(data.data));
+          console.log("set photo", data.data);
+        } catch (err) {}
       }
+      setLoading(false);
     }
-    if (id) getPhoto();
-    else navigate("/main");
+    getPhoto();
   }, []);
+
   if (loading) return <h2>Загрузка....</h2>;
 
   return (

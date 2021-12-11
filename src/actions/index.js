@@ -7,9 +7,9 @@ export const addPhotos = (photos) => {
 
 
 
-export const getPhotoID = (photo) => {
+export const setPhotoID = (photo) => {
   return {
-    type: "GET_PHOTO",
+    type: "SET_PHOTO",
     payload: photo
 }
 }

@@ -14,7 +14,7 @@ function photos(state = initialState, action) {
         page: state.page + 1,
       };
 
-    case "GET_PHOTO":
+    case "SET_PHOTO":
       return {
         ...state,
         photo: action.payload,
